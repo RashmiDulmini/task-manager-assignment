@@ -1,6 +1,6 @@
-// LLM: Render styled form inputs.
+// Render styled form inputs.
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (

@@ -1,6 +1,6 @@
-// LLM: Render styled multiline form inputs.
+// Render styled multiline form inputs.
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 function Textarea({ className, ...props }: React.ComponentProps<"textarea">) {
   return (

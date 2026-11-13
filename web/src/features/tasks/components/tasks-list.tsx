@@ -1,4 +1,4 @@
-// LLM: Fetch tasks and coordinate loading, error, empty, and success states.
+// Fetch tasks and coordinate loading, error, empty, and success states.
 "use client";
 
 import { useEffect, useState } from "react";
@@ -88,7 +88,7 @@ export function TasksList() {
             id="tasks-heading"
             className="scroll-mt-28 text-2xl font-semibold tracking-tight"
           >
-            LLM All Tasks
+            All Tasks
           </h2>
           <p role="status" className="text-sm text-muted-foreground">
             {state.status === "loading"
@@ -125,7 +125,7 @@ export function TasksList() {
             htmlFor="task-search"
             className="text-xs text-muted-foreground"
           >
-            LLM Search Tasks
+            Search Tasks
           </Label>
           <div className="relative">
             <Search
@@ -142,7 +142,7 @@ export function TasksList() {
           </div>
         </div>
         <div className="w-full space-y-2 sm:w-48">
-          <Label htmlFor="task-status-filter">LLM Filter by Status</Label>
+          <Label htmlFor="task-status-filter">Filter by Status</Label>
           <Select
             value={statusFilter}
             onValueChange={(value) => setStatusFilter(value as StatusFilter)}
@@ -159,7 +159,7 @@ export function TasksList() {
           </Select>
         </div>
         <div className="w-full space-y-2 sm:w-56">
-          <Label htmlFor="task-due-sort">LLM Sort by Due Date</Label>
+          <Label htmlFor="task-due-sort">Sort by Due Date</Label>
           <Select
             value={dueDateSort}
             onValueChange={(value) => setDueDateSort(value as DueDateSort)}
@@ -186,7 +186,7 @@ export function TasksList() {
       {state.status === "error" ? (
         <Alert variant="destructive">
           <AlertCircle aria-hidden="true" />
-          <AlertTitle>LLM Unable to load tasks</AlertTitle>
+          <AlertTitle>Unable to load tasks</AlertTitle>
           <AlertDescription>
             <p>{state.message}</p>
             <Button variant="outline" className="mt-3" onClick={refresh}>

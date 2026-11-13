@@ -1,4 +1,4 @@
-// LLM: Render task rows, loading placeholders, and the empty state.
+// Render task rows, loading placeholders, and the empty state.
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import {
@@ -52,19 +52,19 @@ export function TasksTable({
   return (
     <div className="task-surface overflow-hidden rounded-2xl border border-white bg-card">
       <Table aria-busy={loading}>
-        <TableCaption className="sr-only">LLM Tasks</TableCaption>
+        <TableCaption className="sr-only">Tasks</TableCaption>
         <TableHeader className="bg-slate-50/80 [&_th]:h-12 [&_th]:text-xs [&_th]:font-semibold [&_th]:text-slate-500">
           <TableRow>
             <TableHead scope="col" className="px-4">
-              LLM Title
+              Title
             </TableHead>
-            <TableHead scope="col">LLM Description</TableHead>
-            <TableHead scope="col">LLM Status</TableHead>
+            <TableHead scope="col">Description</TableHead>
+            <TableHead scope="col">Status</TableHead>
             <TableHead scope="col" className="pr-4">
-              LLM Due Date
+              Due Date
             </TableHead>
             <TableHead scope="col" className="pr-4 text-right">
-              LLM Actions
+              Actions
             </TableHead>
           </TableRow>
         </TableHeader>
@@ -92,7 +92,7 @@ export function TasksTable({
                     <ClipboardList aria-hidden="true" className="size-7" />
                   </span>
                   <p className="font-semibold text-foreground">
-                    {filtered ? "LLM No matching tasks" : "LLM: No tasks yet"}
+                    {filtered ? "No matching tasks" : "No tasks yet"}
                   </p>
                   <p className="text-sm leading-6 text-muted-foreground">
                     {filtered

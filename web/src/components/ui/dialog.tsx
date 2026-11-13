@@ -1,8 +1,8 @@
-// LLM: Provide modal dialog building blocks.
+// Provide modal dialog building blocks.
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { Dialog as DialogPrimitive } from "radix-ui"
 
 import { Button } from "@/components/ui/button"

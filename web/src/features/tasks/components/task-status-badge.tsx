@@ -1,4 +1,4 @@
-// LLM: Display readable status badges with distinct colors.
+// Display readable status badges with distinct colors.
 import { Badge } from "@/components/ui/badge";
 import type { TaskStatus } from "../types/task";
 

@@ -1,4 +1,4 @@
-// LLM: Present the Task Manager workspace and API-connected task list.
+// Present the Task Manager workspace and API-connected task list.
 import { TasksList } from "@/features/tasks/components/tasks-list";
 import {
   CheckCheck,
@@ -25,7 +25,7 @@ export default function Home() {
             <CheckCheck aria-hidden="true" />
           </span>
           <div className="text-sm font-semibold text-white">
-            LLM Task Manager
+            Task Manager
             <p className="mt-1 text-[11px] font-normal text-slate-400">
               Space to do great things
             </p>
@@ -81,7 +81,7 @@ export default function Home() {
               <CheckCheck aria-hidden="true" className="size-6" />
             </span>
             <span className="font-semibold tracking-tight">
-              LLM Workspace
+              Workspace
               <span className="mt-0.5 block text-xs font-normal tracking-normal text-muted-foreground">
                 A little clarity for your everyday.
               </span>
@@ -124,7 +124,7 @@ export default function Home() {
               id="welcome-heading"
               className="text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl xl:text-5xl"
             >
-              LLM Less clutter.
+              Less clutter.
               <br />
               <span className="text-violet-200">More momentum.</span>
             </h1>

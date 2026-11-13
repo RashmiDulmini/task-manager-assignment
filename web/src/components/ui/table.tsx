@@ -1,8 +1,8 @@
-// LLM: Provide accessible table building blocks.
+// Provide accessible table building blocks.
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 
 function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (

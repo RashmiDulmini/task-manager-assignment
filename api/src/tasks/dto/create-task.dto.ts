@@ -14,7 +14,7 @@ export class CreateTaskDto {
   )
   @IsString()
   @IsNotEmpty()
-  title: string;
+  title!: string;
 
   @ValidateIf((_object, value: unknown) => value !== undefined)
   @IsString()

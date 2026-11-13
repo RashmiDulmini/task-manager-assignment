@@ -9,7 +9,7 @@ import { TaskStatus } from './task-status.enum';
 export class TasksService {
   private readonly tasks = new Map<string, Task>();
 
-  // LLM: Create and store a task with a generated ID, creation time, and default status.
+  // Create and store a task with a generated ID, creation time, and default status.
   create(dto: CreateTaskDto): Task {
     const task: Task = {
       id: randomUUID(),
@@ -24,12 +24,12 @@ export class TasksService {
     return task;
   }
 
-  // LLM: Return all tasks in the order they were created.
+  // Return all tasks in the order they were created.
   findAll(): Task[] {
     return Array.from(this.tasks.values());
   }
 
-  // LLM: Find a task by ID or throw a 404 error when it does not exist.
+  // Find a task by ID or throw a 404 error when it does not exist.
   findOne(id: string): Task {
     const task = this.tasks.get(id);
 
@@ -40,7 +40,7 @@ export class TasksService {
     return task;
   }
 
-  // LLM: Update only supplied editable fields while preserving the task ID and creation time.
+  // Update only supplied editable fields while preserving the task ID and creation time.
   update(id: string, dto: UpdateTaskDto): Task {
     const task = this.findOne(id);
 
@@ -53,7 +53,7 @@ export class TasksService {
     return task;
   }
 
-  // LLM: Delete an existing task or throw a 404 error when it does not exist.
+  // Delete an existing task or throw a 404 error when it does not exist.
   remove(id: string): void {
     this.findOne(id);
     this.tasks.delete(id);

@@ -1,5 +1,5 @@
-// LLM: Display loading placeholders.
-import { cn } from "cn"
+// Display loading placeholders.
+import { cn } from "@/lib/utils"
 
 function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (

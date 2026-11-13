@@ -1,4 +1,4 @@
-// LLM: Summarize task progress with accessible status cards and a completion indicator.
+// Summarize task progress with accessible status cards and a completion indicator.
 import { CheckCircle2, Circle, Layers3, Timer } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Task } from "../types/task";
@@ -16,28 +16,28 @@ export function TaskOverview({
   const progress = tasks.length ? Math.round((done / tasks.length) * 100) : 0;
   const cards = [
     {
-      label: "LLM Total Tasks",
+      label: "Total Tasks",
       count: tasks.length,
       icon: Layers3,
       color: "bg-indigo-50 text-indigo-600",
       hint: "Everything on your list",
     },
     {
-      label: "LLM To Do",
+      label: "To Do",
       count: tasks.filter((task) => task.status === "TODO").length,
       icon: Circle,
       color: "bg-slate-100 text-slate-600",
       hint: "Ready when you are",
     },
     {
-      label: "LLM In Progress",
+      label: "In Progress",
       count: tasks.filter((task) => task.status === "IN_PROGRESS").length,
       icon: Timer,
       color: "bg-amber-50 text-amber-700",
       hint: "Keep the momentum",
     },
     {
-      label: "LLM Completed",
+      label: "Completed",
       count: done,
       icon: CheckCircle2,
       color: "bg-emerald-50 text-emerald-700",

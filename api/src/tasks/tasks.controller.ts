@@ -18,31 +18,31 @@ import { TasksService } from './tasks.service';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  // LLM: Return every stored task.
+  // Return every stored task.
   @Get()
   findAll(): Task[] {
     return this.tasksService.findAll();
   }
 
-  // LLM: Return a task by ID or respond with 404 when it is missing.
+  // Return a task by ID or respond with 404 when it is missing.
   @Get(':id')
   findOne(@Param('id') id: string): Task {
     return this.tasksService.findOne(id);
   }
 
-  // LLM: Validate the request body and create a task with a 201 response.
+  // Validate the request body and create a task with a 201 response.
   @Post()
   create(@Body() dto: CreateTaskDto): Task {
     return this.tasksService.create(dto);
   }
 
-  // LLM: Validate supplied fields and update an existing task or respond with 404.
+  // Validate supplied fields and update an existing task or respond with 404.
   @Patch(':id')
   update(@Param('id') id: string, @Body() dto: UpdateTaskDto): Task {
     return this.tasksService.update(id, dto);
   }
 
-  // LLM: Delete a task with a 204 response or respond with 404 when it is missing.
+  // Delete a task with a 204 response or respond with 404 when it is missing.
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   remove(@Param('id') id: string): void {

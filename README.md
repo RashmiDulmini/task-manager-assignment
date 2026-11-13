@@ -77,7 +77,7 @@ Visit `http://localhost:3001/` to check that the server responds with `{"status"
 Server configuration lives in:
 
 - `api/src/main.ts`: creates the application, checks the port, and starts listening.
-- `api/src/app.module.ts`: registers the root controller, service, and environment configuration.
+- `api/src/app.module.ts`: registers the root status controller, Tasks module, and environment configuration.
 - `api/src/configure-app.ts`: enables CORS, shutdown hooks, and the global validation pipe.
 
 The validation pipe transforms request objects into DTO instances and rejects fields that have no validation decorators. Task DTOs validate nonblank titles, string descriptions, supported status values, and ISO date strings. Optional fields can be omitted. PATCH accepts `dueDate: null` to clear an existing date; other explicit `null` values are rejected. Update requests validate only supplied fields. The service defaults new tasks to `TODO`.

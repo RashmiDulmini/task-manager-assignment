@@ -1,4 +1,4 @@
-// LLM: Confirm task deletion and show pending, error, and success feedback.
+// Confirm task deletion and show pending, error, and success feedback.
 "use client";
 
 import { useRef, useState } from "react";
@@ -66,7 +66,7 @@ export function DeleteTaskDialog({
         }}
       >
         <AlertDialogHeader>
-          <AlertDialogTitle>LLM Delete Task</AlertDialogTitle>
+          <AlertDialogTitle>Delete Task</AlertDialogTitle>
           <AlertDialogDescription className="break-words">
             Delete &quot;{task.title}&quot;? This action cannot be undone.
           </AlertDialogDescription>

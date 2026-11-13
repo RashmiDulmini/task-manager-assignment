@@ -1,4 +1,4 @@
-// LLM: Create or edit a task in an accessible dialog with validation and save feedback.
+// Create or edit a task in an accessible dialog with validation and save feedback.
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
@@ -111,7 +111,7 @@ export function TaskFormDialog({
       >
         <DialogHeader>
           <DialogTitle>
-            {task ? "LLM Edit Task" : "LLM Create Task"}
+            {task ? "Edit Task" : "Create Task"}
           </DialogTitle>
           <DialogDescription>
             {task
@@ -123,7 +123,7 @@ export function TaskFormDialog({
           <fieldset disabled={saving} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="task-title">
-                LLM Title{" "}
+                Title{" "}
                 <span className="text-destructive" aria-hidden="true">
                   *
                 </span>
@@ -153,7 +153,7 @@ export function TaskFormDialog({
             </div>
             <div className="space-y-2">
               <Label htmlFor="task-description">
-                LLM Description{" "}
+                Description{" "}
                 <span className="font-normal text-muted-foreground">
                   (optional)
                 </span>
@@ -167,7 +167,7 @@ export function TaskFormDialog({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="task-status">LLM Status</Label>
+              <Label htmlFor="task-status">Status</Label>
               <Select
                 value={status}
                 onValueChange={(value) => setStatus(value as TaskStatus)}
@@ -185,7 +185,7 @@ export function TaskFormDialog({
             </div>
             <div className="space-y-2">
               <Label htmlFor="task-due-date">
-                LLM Due Date{" "}
+                Due Date{" "}
                 <span className="font-normal text-muted-foreground">
                   (optional)
                 </span>

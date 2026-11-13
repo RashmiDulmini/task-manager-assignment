@@ -1,8 +1,8 @@
-// LLM: Render accessible form labels.
+// Render accessible form labels.
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import { Label as LabelPrimitive } from "radix-ui"
 
 function Label({
