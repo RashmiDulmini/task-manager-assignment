@@ -1,5 +1,6 @@
 // LLM: Render task rows, loading placeholders, and the empty state.
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -27,9 +28,11 @@ function formatDueDate(value: string): string {
 export function TasksTable({
   tasks,
   loading = false,
+  onEdit,
 }: {
   tasks: Task[];
   loading?: boolean;
+  onEdit?: (task: Task) => void;
 }) {
   return (
     <div className="overflow-hidden rounded-xl border bg-card">
@@ -45,13 +48,16 @@ export function TasksTable({
             <TableHead scope="col" className="pr-4">
               LLM Due Date
             </TableHead>
+            <TableHead scope="col" className="pr-4 text-right">
+              LLM Actions
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {loading ? (
             Array.from({ length: 4 }, (_, row) => (
               <TableRow key={row} aria-hidden="true">
-                {Array.from({ length: 4 }, (_, column) => (
+                {Array.from({ length: 5 }, (_, column) => (
                   <TableCell key={column} className="px-4 py-5">
                     <Skeleton
                       className={column === 1 ? "h-4 w-40" : "h-4 w-24"}
@@ -63,7 +69,7 @@ export function TasksTable({
           ) : tasks.length === 0 ? (
             <TableRow>
               <TableCell
-                colSpan={4}
+                colSpan={5}
                 className="py-16 text-center text-muted-foreground"
               >
                 LLM: No tasks yet
@@ -89,6 +95,17 @@ export function TasksTable({
                   ) : (
                     "—"
                   )}
+                </TableCell>
+                <TableCell className="pr-4 text-right">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={!onEdit}
+                    onClick={() => onEdit?.(task)}
+                    aria-label={`Edit ${task.title}`}
+                  >
+                    Edit
+                  </Button>
                 </TableCell>
               </TableRow>
             ))

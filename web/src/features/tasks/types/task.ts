@@ -16,4 +16,6 @@ export interface CreateTaskInput {
   dueDate?: string;
 }
 
-export type UpdateTaskInput = Partial<CreateTaskInput>;
+export type UpdateTaskInput = Omit<Partial<CreateTaskInput>, "dueDate"> & {
+  dueDate?: string | null;
+};

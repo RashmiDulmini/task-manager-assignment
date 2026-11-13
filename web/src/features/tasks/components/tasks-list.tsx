@@ -9,6 +9,7 @@ import { ApiError } from "@/lib/api";
 import { tasksApi } from "../api";
 import type { Task } from "../types/task";
 import { TasksTable } from "./tasks-table";
+import { TaskFormDialog } from "./task-form-dialog";
 
 type State =
   | { status: "loading" }
@@ -18,6 +19,7 @@ type State =
 export function TasksList() {
   const [state, setState] = useState<State>({ status: "loading" });
   const [revision, setRevision] = useState(0);
+  const [editor, setEditor] = useState<{ task?: Task } | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -60,17 +62,20 @@ export function TasksList() {
                 : "Tasks could not be loaded."}
           </p>
         </div>
-        <Button
-          variant="outline"
-          onClick={refresh}
-          disabled={state.status === "loading"}
-        >
-          <RefreshCw
-            aria-hidden="true"
-            className={state.status === "loading" ? "animate-spin" : ""}
-          />
-          Refresh
-        </Button>
+        <div className="flex flex-wrap justify-end gap-2">
+          <Button onClick={() => setEditor({})}>Create task</Button>
+          <Button
+            variant="outline"
+            onClick={refresh}
+            disabled={state.status === "loading"}
+          >
+            <RefreshCw
+              aria-hidden="true"
+              className={state.status === "loading" ? "animate-spin" : ""}
+            />
+            Refresh
+          </Button>
+        </div>
       </div>
       {state.status === "error" ? (
         <Alert variant="destructive">
@@ -87,6 +92,18 @@ export function TasksList() {
         <TasksTable
           tasks={state.status === "success" ? state.tasks : []}
           loading={state.status === "loading"}
+          onEdit={(task) => setEditor({ task })}
+        />
+      )}
+      {editor && (
+        <TaskFormDialog
+          key={editor.task?.id ?? "create"}
+          task={editor.task}
+          onClose={() => setEditor(null)}
+          onSaved={() => {
+            setEditor(null);
+            refresh();
+          }}
         />
       )}
     </section>
