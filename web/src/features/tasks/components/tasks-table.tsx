@@ -29,10 +29,14 @@ export function TasksTable({
   tasks,
   loading = false,
   onEdit,
+  onDelete,
+  filtered = false,
 }: {
   tasks: Task[];
   loading?: boolean;
   onEdit?: (task: Task) => void;
+  onDelete?: (task: Task) => void;
+  filtered?: boolean;
 }) {
   return (
     <div className="overflow-hidden rounded-xl border bg-card">
@@ -73,6 +77,12 @@ export function TasksTable({
                 className="py-16 text-center text-muted-foreground"
               >
                 LLM: No tasks yet
+                {filtered && (
+                  <p className="mt-2 text-xs">
+                    No tasks match this status. Choose another status to see
+                    more tasks.
+                  </p>
+                )}
               </TableCell>
             </TableRow>
           ) : (
@@ -105,6 +115,16 @@ export function TasksTable({
                     aria-label={`Edit ${task.title}`}
                   >
                     Edit
+                  </Button>
+                  <Button
+                    className="ml-2"
+                    variant="destructive"
+                    size="sm"
+                    disabled={!onDelete}
+                    onClick={() => onDelete?.(task)}
+                    aria-label={`Delete ${task.title}`}
+                  >
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

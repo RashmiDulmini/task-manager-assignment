@@ -1,4 +1,4 @@
-﻿# Task Manager frontend
+# Task Manager frontend
 
 Next.js App Router frontend with TypeScript, Tailwind CSS, and shadcn/ui.
 
@@ -16,7 +16,7 @@ Open http://localhost:3000. On macOS/Linux, use `cp .env.example .env.local` ins
 
 `NEXT_PUBLIC_API_URL` configures the task API service and defaults to http://localhost:3001 when omitted. Put overrides in `.env.local` and restart the dev server after changing them. Public environment variables are included in the browser bundle; production changes require a new build. Never put secrets in `NEXT_PUBLIC_` variables. The home page fetches and displays tasks from this API.
 
-The table includes status badges and due dates, with loading placeholders, an empty state, and an error message with retry. Click Create task to open the form or Edit on a row to change its details. Title is required; description and due date are optional. The form defaults new tasks to TODO and preserves existing values when editing. Clearing a saved due date sends `dueDate: null`. While saving, duplicate submits and dismissal are blocked. Success closes the dialog, shows a toast, and refreshes the list; failure keeps your input and displays the error. Delete controls are not implemented yet.
+The table includes status badges and due dates, with loading placeholders, an empty state, and an error message with retry. Click Create task to open the form or Edit on a row to change its details. Title is required; description and due date are optional. The form defaults new tasks to TODO and preserves existing values when editing. Clearing a saved due date sends `dueDate: null`. While saving, duplicate submits and dismissal are blocked. Success closes the dialog, shows a toast, and refreshes the list; failure keeps your input and displays the error. Click Delete on a row to open a confirmation dialog. Cancel leaves the task unchanged; successful confirmation shows a toast and refreshes the list. Failed saves and deletes show an error toast and keep the dialog open for retry.
 
 To check manually, run both apps, create a task, edit its status, and clear its due date. Verify each result in the refreshed table. Stop the backend and try saving again to check the error state and retained input; restart the backend and retry. Tasks are in memory, so restarting clears them.
 
@@ -42,3 +42,5 @@ To build and run in production:
 npm run build
 npm start
 ```
+
+Filter by status using All statuses, To do, In progress, or Done. Sort by due date using Creation order, Earliest first, or Latest first. Undated tasks remain last in both date directions, equal dates retain their order, and the original task list is not mutated. Filters and sorting stay active during refreshes and mutations for the current page session. The table shows the number of visible tasks.

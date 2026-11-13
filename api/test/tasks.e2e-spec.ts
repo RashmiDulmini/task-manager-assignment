@@ -163,6 +163,24 @@ describe('Tasks API (e2e)', () => {
     },
   );
 
+  it('clears an existing due date without changing other task fields', async () => {
+    const created = await createTask({
+      title: 'Task with a due date',
+      dueDate: '2026-12-01',
+    });
+    const expected = { ...created };
+    delete expected.dueDate;
+    await request(app.getHttpServer())
+      .patch(`/tasks/${created.id}`)
+      .send({ dueDate: null })
+      .expect(200)
+      .expect(expected);
+    await request(app.getHttpServer())
+      .get(`/tasks/${created.id}`)
+      .expect(200)
+      .expect(expected);
+  });
+
   it('returns 400 for malformed JSON', async () => {
     await request(app.getHttpServer())
       .post('/tasks')

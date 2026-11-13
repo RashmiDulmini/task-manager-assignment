@@ -71,6 +71,11 @@ export function TaskFormDialog({
         await tasksApi.create({ ...fields, ...(dueDate ? { dueDate } : {}) });
       }
     } catch (error) {
+      toast.error(
+        error instanceof ApiError
+          ? error.message
+          : "Unable to save this task. Please try again.",
+      );
       setError(
         error instanceof ApiError
           ? error.message

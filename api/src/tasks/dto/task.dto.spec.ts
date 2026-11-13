@@ -49,7 +49,6 @@ describe('Task DTO validation', () => {
     { description: null },
     { dueDate: 'tomorrow' },
     { dueDate: '2026-02-30' },
-    { dueDate: null },
     { id: 'client-supplied-id' },
     { createdAt: '2026-11-13' },
   ])('rejects invalid fields on create and update: %p', async (fields) => {
@@ -65,6 +64,15 @@ describe('Task DTO validation', () => {
     await expect(
       validate({ status: TaskStatus.DONE }, UpdateTaskDto),
     ).resolves.toEqual({ status: TaskStatus.DONE });
+  });
+
+  it('accepts null to clear a due date on update but not on create', async () => {
+    await expect(validate({ dueDate: null }, UpdateTaskDto)).resolves.toEqual({
+      dueDate: null,
+    });
+    await expect(
+      validate({ title: 'Task', dueDate: null }),
+    ).rejects.toBeInstanceOf(BadRequestException);
   });
 
   it('accepts an empty update', async () => {

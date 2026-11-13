@@ -25,7 +25,9 @@ export class UpdateTaskDto {
   @IsEnum(TaskStatus)
   status?: TaskStatus;
 
-  @ValidateIf((_object, value: unknown) => value !== undefined)
+  @ValidateIf(
+    (_object, value: unknown) => value !== undefined && value !== null,
+  )
   @IsDateString({ strict: true })
-  dueDate?: string;
+  dueDate?: string | null;
 }

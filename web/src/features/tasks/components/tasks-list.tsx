@@ -10,6 +10,20 @@ import { tasksApi } from "../api";
 import type { Task } from "../types/task";
 import { TasksTable } from "./tasks-table";
 import { TaskFormDialog } from "./task-form-dialog";
+import { DeleteTaskDialog } from "./delete-task-dialog";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  selectTasks,
+  type StatusFilter,
+  type DueDateSort,
+} from "../task-list-options";
 
 type State =
   | { status: "loading" }
@@ -20,6 +34,13 @@ export function TasksList() {
   const [state, setState] = useState<State>({ status: "loading" });
   const [revision, setRevision] = useState(0);
   const [editor, setEditor] = useState<{ task?: Task } | null>(null);
+  const [deletion, setDeletion] = useState<Task | null>(null);
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL");
+  const [dueDateSort, setDueDateSort] = useState<DueDateSort>("NONE");
+  const visibleTasks =
+    state.status === "success"
+      ? selectTasks(state.tasks, statusFilter, dueDateSort)
+      : [];
 
   useEffect(() => {
     const controller = new AbortController();
@@ -77,6 +98,49 @@ export function TasksList() {
           </Button>
         </div>
       </div>
+      <div className="flex flex-wrap gap-4">
+        <div className="w-full space-y-2 sm:w-48">
+          <Label htmlFor="task-status-filter">LLM Filter by Status</Label>
+          <Select
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value as StatusFilter)}
+          >
+            <SelectTrigger id="task-status-filter" className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="ALL">All statuses</SelectItem>
+              <SelectItem value="TODO">To do</SelectItem>
+              <SelectItem value="IN_PROGRESS">In progress</SelectItem>
+              <SelectItem value="DONE">Done</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="w-full space-y-2 sm:w-56">
+          <Label htmlFor="task-due-sort">LLM Sort by Due Date</Label>
+          <Select
+            value={dueDateSort}
+            onValueChange={(value) => setDueDateSort(value as DueDateSort)}
+          >
+            <SelectTrigger id="task-due-sort" className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="NONE">Creation order</SelectItem>
+              <SelectItem value="ASC">Earliest first</SelectItem>
+              <SelectItem value="DESC">Latest first</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        {state.status === "success" && (
+          <p
+            className="self-end pb-2 text-sm text-muted-foreground"
+            role="status"
+          >
+            Showing {visibleTasks.length} of {state.tasks.length} tasks
+          </p>
+        )}
+      </div>
       {state.status === "error" ? (
         <Alert variant="destructive">
           <AlertCircle aria-hidden="true" />
@@ -90,9 +154,15 @@ export function TasksList() {
         </Alert>
       ) : (
         <TasksTable
-          tasks={state.status === "success" ? state.tasks : []}
+          tasks={visibleTasks}
+          filtered={
+            state.status === "success" &&
+            state.tasks.length > 0 &&
+            statusFilter !== "ALL"
+          }
           loading={state.status === "loading"}
           onEdit={(task) => setEditor({ task })}
+          onDelete={setDeletion}
         />
       )}
       {editor && (
@@ -102,6 +172,17 @@ export function TasksList() {
           onClose={() => setEditor(null)}
           onSaved={() => {
             setEditor(null);
+            refresh();
+          }}
+        />
+      )}
+      {deletion && (
+        <DeleteTaskDialog
+          key={deletion.id}
+          task={deletion}
+          onClose={() => setDeletion(null)}
+          onDeleted={() => {
+            setDeletion(null);
             refresh();
           }}
         />

@@ -47,7 +47,8 @@ export class TasksService {
     if (dto.title !== undefined) task.title = dto.title;
     if (dto.description !== undefined) task.description = dto.description;
     if (dto.status !== undefined) task.status = dto.status;
-    if (dto.dueDate !== undefined) task.dueDate = dto.dueDate;
+    if (dto.dueDate === null) delete task.dueDate;
+    else if (dto.dueDate !== undefined) task.dueDate = dto.dueDate;
 
     return task;
   }
