@@ -73,7 +73,7 @@ Server configuration lives in:
 - `api/src/app.module.ts`: registers the root controller, service, and environment configuration.
 - `api/src/configure-app.ts`: enables CORS, shutdown hooks, and the global validation pipe.
 
-The validation pipe transforms request objects into DTO instances and rejects fields that have no validation decorators. Field-specific rules will be added with the task DTOs.
+The validation pipe transforms request objects into DTO instances and rejects fields that have no validation decorators. Task DTOs validate nonblank titles, string descriptions, supported status values, and ISO date strings. Optional fields can be omitted; explicit `null` values are rejected. Update requests validate only the fields supplied. The service will assign the default status when task creation is implemented.
 
 Other backend commands (run inside `api`):
 
@@ -87,8 +87,8 @@ npm run lint       # ESLint checks with automatic fixes
 
 ## Implementation status
 
-The backend server is initialized. Task CRUD endpoints and DTOs will be added in the next step. The `web` folder contains the planned frontend directories; the Next.js application has not been initialized yet.
+The backend server, Task interface, status enum, and create/update validation DTOs are implemented. Task CRUD endpoints will be added in the next step. The `web` folder contains the planned frontend directories; the Next.js application has not been initialized yet.
 
 ## How I used AI
 
-I used OpenAI Codex to create the initial folder structure and initialize the backend using the official NestJS CLI. Codex adapted the starter to configure environment variables, frontend CORS access, and global request validation, and documented the setup commands. The task endpoints and frontend are still to be implemented.
+I used OpenAI Codex to create the initial folder structure and initialize the backend using the official NestJS CLI. Codex adapted the starter to configure environment variables, frontend CORS access, and global request validation, and documented the setup commands. Codex also added the Task interface, status enum, create/update DTOs, and validation tests. The task endpoints and frontend are still to be implemented.
