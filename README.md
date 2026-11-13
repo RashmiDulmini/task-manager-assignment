@@ -31,7 +31,33 @@ The API will keep task routes, business logic, validation, and the data model to
 - Node.js 22 LTS (22.17.1 or newer in the 22.x release line)
 - npm 10 or newer (included with Node.js)
 
-## Run the backend
+## Run both apps with Docker Compose
+
+Install Docker Desktop with Docker Compose v2 and start it using Linux containers. Alternatively, use Docker Engine with the Compose v2 plugin on Linux. Node.js is not required on the host for this option.
+
+After cloning the repository, run from its root directory:
+
+```sh
+git clone https://github.com/RashmiDulmini/task-manager-assignment.git
+cd task-manager-assignment
+docker compose up --build
+```
+
+Open `http://localhost:3000` for the frontend and `http://localhost:3001/` for API status. Compose installs dependencies and builds both applications inside the images; you do not need local environment files or a database. Stop any locally running apps on ports 3000 and 3001 first.
+
+The frontend waits for the API health check before starting. Container configuration is in `compose.yaml`. The public API URL is a build argument because browser requests use your computer's published API port, not the internal Docker service name. If hosting elsewhere, change that argument and `WEB_ORIGIN` to the actual browser-accessible URLs, then rebuild.
+
+Other commands:
+
+```sh
+docker compose up --build -d  # Run in the background
+docker compose logs -f       # Follow application logs
+docker compose down          # Stop and remove containers
+```
+
+Task data is in memory and resets whenever the API process or container restarts. Rebuild after source changes; these containers run production builds without live reload.
+
+## Run the backend locally
 
 First clone the repository and open its root directory:
 
