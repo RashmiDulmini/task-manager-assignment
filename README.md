@@ -87,8 +87,10 @@ npm run lint       # ESLint checks with automatic fixes
 
 ## Implementation status
 
-The backend server, Task interface, status enum, and create/update validation DTOs are implemented. Task CRUD endpoints will be added in the next step. The `web` folder contains the planned frontend directories; the Next.js application has not been initialized yet.
+The backend server, Task interface, status enum, create/update validation DTOs, and Tasks service are implemented. The service supports creating, listing, finding, updating, and deleting tasks. Tasks are stored in memory and are lost when the server restarts; no database setup is required. New tasks default to `TODO`, and finding, updating, or deleting a missing task raises a 404 error.
+
+Task HTTP endpoints will be added in the next step. The `web` folder contains the planned frontend directories; the Next.js application has not been initialized yet.
 
 ## How I used AI
 
-I used OpenAI Codex to create the initial folder structure and initialize the backend using the official NestJS CLI. Codex adapted the starter to configure environment variables, frontend CORS access, and global request validation, and documented the setup commands. Codex also added the Task interface, status enum, create/update DTOs, and validation tests. The task endpoints and frontend are still to be implemented.
+I used OpenAI Codex to create the initial folder structure and initialize the backend using the official NestJS CLI. Codex adapted the starter to configure environment variables, frontend CORS access, and global request validation, and documented the setup commands. Codex also added the Task interface, status enum, create/update DTOs, in-memory Tasks service and module, and validation and service tests. The task endpoints and frontend are still to be implemented.
