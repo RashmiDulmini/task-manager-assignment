@@ -50,20 +50,20 @@ export function TaskOverview({
         {cards.map(({ label, count, icon: Icon, color, hint }) => (
           <div
             key={label}
-            className="rounded-2xl border bg-card p-4 shadow-sm sm:p-5"
+            className="stat-card relative overflow-hidden rounded-2xl border border-white bg-white/90 p-4 sm:p-5"
           >
             <div className="mb-4 flex items-start justify-between gap-2">
               <h2 className="text-xs font-medium text-muted-foreground sm:text-sm">
                 {label}
               </h2>
-              <span className={`rounded-lg p-2 ${color}`}>
+              <span className={`rounded-xl p-2.5 ring-4 ring-white ${color}`}>
                 <Icon aria-hidden="true" className="size-4" />
               </span>
             </div>
             {loading ? (
               <Skeleton className="mb-2 h-8 w-12" />
             ) : (
-              <p className="mb-1 text-3xl font-semibold tracking-tight tabular-nums">
+              <p className="mb-1 text-4xl font-semibold tracking-tight tabular-nums">
                 {unavailable ? "—" : count}
               </p>
             )}

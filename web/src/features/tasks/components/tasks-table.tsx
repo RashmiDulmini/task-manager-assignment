@@ -50,7 +50,7 @@ export function TasksTable({
   onResetFilters?: () => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-2xl border bg-card shadow-sm">
+    <div className="task-surface overflow-hidden rounded-2xl border border-white bg-card">
       <Table aria-busy={loading}>
         <TableCaption className="sr-only">LLM Tasks</TableCaption>
         <TableHeader className="bg-slate-50/80 [&_th]:h-12 [&_th]:text-xs [&_th]:font-semibold [&_th]:text-slate-500">

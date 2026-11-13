@@ -76,7 +76,7 @@ export function TasksList() {
   }
 
   return (
-    <section aria-labelledby="tasks-heading" className="space-y-6">
+    <section aria-labelledby="tasks-heading" className="space-y-7">
       <TaskOverview
         tasks={state.status === "success" ? state.tasks : []}
         loading={state.status === "loading"}
@@ -84,7 +84,10 @@ export function TasksList() {
       />
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div className="space-y-1">
-          <h2 id="tasks-heading" className="text-xl font-semibold">
+          <h2
+            id="tasks-heading"
+            className="scroll-mt-28 text-2xl font-semibold tracking-tight"
+          >
             LLM All Tasks
           </h2>
           <p role="status" className="text-sm text-muted-foreground">
@@ -97,7 +100,7 @@ export function TasksList() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Button
-            className="h-10 rounded-lg px-4 shadow-sm"
+            className="primary-action h-11 rounded-xl px-5"
             onClick={() => setEditor({})}
           >
             <Plus aria-hidden="true" />
@@ -116,7 +119,7 @@ export function TasksList() {
           </Button>
         </div>
       </div>
-      <div className="flex flex-wrap items-end gap-4 rounded-xl border bg-white p-4 shadow-sm">
+      <div className="filter-panel flex flex-wrap items-end gap-4 rounded-2xl border border-white/90 bg-white/85 p-5">
         <div className="w-full flex-1 space-y-2 sm:min-w-52">
           <Label
             htmlFor="task-search"
