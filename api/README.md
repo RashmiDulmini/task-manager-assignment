@@ -10,4 +10,4 @@ npm ci
 npm run start:dev
 ```
 
-The default server address is `http://localhost:3001`. `GET /` returns `{"status":"ok"}`. Task endpoints have not been implemented yet.
+The default server address is `http://localhost:3001`. `GET /` returns `{"status":"ok"}`. The five task endpoints are available at `/tasks` and `/tasks/:id`; see the root README for request fields, response codes, and error behavior. Tasks are stored in memory and reset on server restart.
