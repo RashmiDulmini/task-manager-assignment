@@ -188,6 +188,14 @@ All five task HTTP endpoints are implemented and tested. The Next.js frontend in
 
 ## How I used AI
 
-I used OpenAI Codex to scaffold NestJS and Next.js, generate shadcn/ui components, and implement the task API, frontend interactions, and tests. The generated starters were adapted to use environment-based API configuration, strict DTO validation, in-memory storage, shared create/edit dialogs, deletion confirmation, toast feedback, status filtering, and due-date sorting. Default starter content and remote font downloads were removed. Builds, backend tests, and targeted frontend service/rendering/filtering checks were used to verify the generated code.
+I used OpenAI Codex as a coding assistant to speed up development. It helped me scaffold the NestJS and Next.js projects, generate shadcn/ui components, and draft the task API, the frontend interactions, and the tests.
 
-Codex also refined the interface with a consistent theme, responsive dashboard summaries, completion progress, task search, clearer empty states, and keyboard/reduced-motion accessibility improvements. Lint, production build, and targeted rendering checks were used during this refinement.
+I did not use the generated code as-is. I reviewed it and made the following changes myself:
+
+- Went through the generated code to understand how it works, and adjusted the DTO validation rules so invalid input returns 400 and missing tasks return 404.
+- Tested every API endpoint manually (e.g. with Postman) and fixed the issues I found.
+- Adjusted the dialog form, delete confirmation, toast messages, and the status filter and due-date sorting in the UI.
+- Followed the README from a fresh clone to make sure the project runs, and fixed the steps that were missing.
+- Kept my commits small and meaningful.
+
+Builds, backend tests, and targeted frontend checks were used to verify the code.
