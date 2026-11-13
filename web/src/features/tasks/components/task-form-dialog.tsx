@@ -100,7 +100,7 @@ export function TaskFormDialog({
       }}
     >
       <DialogContent
-        className="max-h-[90dvh] overflow-y-auto sm:max-w-lg"
+        className="max-h-[90dvh] overflow-y-auto rounded-2xl border-slate-200 p-6 shadow-xl sm:max-w-lg sm:p-8"
         showCloseButton={!saving}
         onEscapeKeyDown={(event) => {
           if (pending.current) event.preventDefault();
@@ -122,9 +122,16 @@ export function TaskFormDialog({
         <form onSubmit={submit} className="space-y-5" aria-busy={saving}>
           <fieldset disabled={saving} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="task-title">LLM Title</Label>
+              <Label htmlFor="task-title">
+                LLM Title{" "}
+                <span className="text-destructive" aria-hidden="true">
+                  *
+                </span>
+              </Label>
               <Input
                 id="task-title"
+                placeholder="What needs to get done?"
+                className="h-11"
                 required
                 value={title}
                 onChange={(event) => {
@@ -145,9 +152,15 @@ export function TaskFormDialog({
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="task-description">LLM Description</Label>
+              <Label htmlFor="task-description">
+                LLM Description{" "}
+                <span className="font-normal text-muted-foreground">
+                  (optional)
+                </span>
+              </Label>
               <Textarea
                 id="task-description"
+                placeholder="Add a little context, notes, or next steps..."
                 rows={4}
                 value={description}
                 onChange={(event) => setDescription(event.target.value)}
@@ -171,7 +184,12 @@ export function TaskFormDialog({
               </Select>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="task-due-date">LLM Due Date</Label>
+              <Label htmlFor="task-due-date">
+                LLM Due Date{" "}
+                <span className="font-normal text-muted-foreground">
+                  (optional)
+                </span>
+              </Label>
               <Input
                 id="task-due-date"
                 type="date"

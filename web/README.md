@@ -44,3 +44,5 @@ npm start
 ```
 
 Filter by status using All statuses, To do, In progress, or Done. Sort by due date using Creation order, Earliest first, or Latest first. Undated tasks remain last in both date directions, equal dates retain their order, and the original task list is not mutated. Filters and sorting stay active during refreshes and mutations for the current page session. The table shows the number of visible tasks.
+
+The dashboard includes status summary cards, completion progress, title/description search, guided empty states, and responsive layouts. Search combines with status filtering and date sorting. Keyboard users can focus the scrollable table, and decorative animation respects reduced-motion settings.

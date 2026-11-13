@@ -33,6 +33,13 @@ The API will keep task routes, business logic, validation, and the data model to
 
 ## Run the backend
 
+First clone the repository and open its root directory:
+
+```sh
+git clone https://github.com/RashmiDulmini/task-manager-assignment.git
+cd task-manager-assignment
+```
+
 From the repository root:
 
 ```sh
@@ -155,8 +162,6 @@ All five task HTTP endpoints are implemented and tested. The Next.js frontend in
 
 ## How I used AI
 
-Codex connected the task table to the API, added status badges and loading/empty/error states, and implemented the shared create/edit dialog with save errors and success toasts. It extended PATCH to clear due dates with `null`, added validation and HTTP regression checks, and verified both builds and backend tests. Codex also implemented deletion confirmation, mutation error toasts, status filtering, and due-date sorting, then verified the production build and filtering/sorting behavior.
+I used OpenAI Codex to scaffold NestJS and Next.js, generate shadcn/ui components, and implement the task API, frontend interactions, and tests. The generated starters were adapted to use environment-based API configuration, strict DTO validation, in-memory storage, shared create/edit dialogs, deletion confirmation, toast feedback, status filtering, and due-date sorting. Default starter content and remote font downloads were removed. Builds, backend tests, and targeted frontend service/rendering/filtering checks were used to verify the generated code.
 
-Codex also added the typed frontend task API service, shared request/error handling, environment configuration, and API-service usage documentation. It verified request methods and error handling with mocked fetch responses and checked TypeScript and the production build.
-
-I used OpenAI Codex to create the initial folder structure and initialize the backend using the official NestJS CLI. Codex adapted the starter to configure environment variables, frontend CORS access, and global request validation, and documented the setup commands. Codex also added the Task interface, status enum, create/update DTOs, in-memory Tasks service and module, the Tasks controller, and validation, service, and HTTP integration tests. For the frontend, Codex used create-next-app and the shadcn CLI, replaced the default starter page and metadata, removed remote font downloads, and mounted the toast container. Task listing and create/edit operations are now integrated; deletion confirmation, status filtering, and due-date sorting are integrated.
+Codex also refined the interface with a consistent theme, responsive dashboard summaries, completion progress, task search, clearer empty states, and keyboard/reduced-motion accessibility improvements. Lint, production build, and targeted rendering checks were used during this refinement.

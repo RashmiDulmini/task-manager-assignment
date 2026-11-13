@@ -2,7 +2,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertCircle, RefreshCw } from "lucide-react";
+import { AlertCircle, RefreshCw, Plus, Search } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { TaskOverview } from "./task-overview";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { ApiError } from "@/lib/api";
@@ -37,9 +39,14 @@ export function TasksList() {
   const [deletion, setDeletion] = useState<Task | null>(null);
   const [statusFilter, setStatusFilter] = useState<StatusFilter>("ALL");
   const [dueDateSort, setDueDateSort] = useState<DueDateSort>("NONE");
+  const [search, setSearch] = useState("");
   const visibleTasks =
     state.status === "success"
-      ? selectTasks(state.tasks, statusFilter, dueDateSort)
+      ? selectTasks(state.tasks, statusFilter, dueDateSort).filter((task) =>
+          `${task.title} ${task.description ?? ""}`
+            .toLowerCase()
+            .includes(search.trim().toLowerCase()),
+        )
       : [];
 
   useEffect(() => {
@@ -69,11 +76,16 @@ export function TasksList() {
   }
 
   return (
-    <section aria-labelledby="tasks-heading" className="space-y-5">
-      <div className="flex items-center justify-between gap-4">
+    <section aria-labelledby="tasks-heading" className="space-y-6">
+      <TaskOverview
+        tasks={state.status === "success" ? state.tasks : []}
+        loading={state.status === "loading"}
+        unavailable={state.status === "error"}
+      />
+      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div className="space-y-1">
           <h2 id="tasks-heading" className="text-xl font-semibold">
-            LLM Tasks
+            LLM All Tasks
           </h2>
           <p role="status" className="text-sm text-muted-foreground">
             {state.status === "loading"
@@ -83,8 +95,14 @@ export function TasksList() {
                 : "Tasks could not be loaded."}
           </p>
         </div>
-        <div className="flex flex-wrap justify-end gap-2">
-          <Button onClick={() => setEditor({})}>Create task</Button>
+        <div className="flex flex-wrap gap-2">
+          <Button
+            className="h-10 rounded-lg px-4 shadow-sm"
+            onClick={() => setEditor({})}
+          >
+            <Plus aria-hidden="true" />
+            New task
+          </Button>
           <Button
             variant="outline"
             onClick={refresh}
@@ -98,7 +116,28 @@ export function TasksList() {
           </Button>
         </div>
       </div>
-      <div className="flex flex-wrap gap-4">
+      <div className="flex flex-wrap items-end gap-4 rounded-xl border bg-white p-4 shadow-sm">
+        <div className="w-full flex-1 space-y-2 sm:min-w-52">
+          <Label
+            htmlFor="task-search"
+            className="text-xs text-muted-foreground"
+          >
+            LLM Search Tasks
+          </Label>
+          <div className="relative">
+            <Search
+              aria-hidden="true"
+              className="absolute left-3 top-3 size-4 text-muted-foreground"
+            />
+            <Input
+              id="task-search"
+              placeholder="Search title or description..."
+              className="h-10 pl-9"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+            />
+          </div>
+        </div>
         <div className="w-full space-y-2 sm:w-48">
           <Label htmlFor="task-status-filter">LLM Filter by Status</Label>
           <Select
@@ -158,8 +197,13 @@ export function TasksList() {
           filtered={
             state.status === "success" &&
             state.tasks.length > 0 &&
-            statusFilter !== "ALL"
+            (statusFilter !== "ALL" || !!search.trim())
           }
+          onCreate={() => setEditor({})}
+          onResetFilters={() => {
+            setSearch("");
+            setStatusFilter("ALL");
+          }}
           loading={state.status === "loading"}
           onEdit={(task) => setEditor({ task })}
           onDelete={setDeletion}

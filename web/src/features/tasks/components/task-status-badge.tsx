@@ -9,7 +9,7 @@ const styles: Record<TaskStatus, { label: string; className: string }> = {
   },
   IN_PROGRESS: {
     label: "In progress",
-    className: "border-blue-200 bg-blue-50 text-blue-700",
+    className: "border-amber-200 bg-amber-50 text-amber-800",
   },
   DONE: {
     label: "Done",
